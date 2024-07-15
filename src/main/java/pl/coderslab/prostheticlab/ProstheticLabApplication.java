@@ -9,5 +9,4 @@ public class ProstheticLabApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProstheticLabApplication.class, args);
     }
-
 }
