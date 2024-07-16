@@ -2,7 +2,6 @@ package pl.coderslab.prostheticlab.domain;
 
 
 import org.hibernate.validator.constraints.pl.NIP;
-import org.hibernate.validator.constraints.pl.REGON;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -10,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "laboratories")
-public class Laboratory {
+@Table(name = "dental_offices")
+public class DentalOffice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +23,6 @@ public class Laboratory {
     @NotBlank
     @NIP
     private String nip;
-
-    @NotBlank
-    @REGON
-    private String regon;
 
     @NotBlank
     @Size(min = 2, message = "nazwa ulicy musi mieć przynajmniej 2 znaki")
@@ -59,16 +54,11 @@ public class Laboratory {
     @Size(min = 9, max = 9, message = "podaj poprawny numer telefonu")
     private String phone;
 
-    @ManyToMany(mappedBy = "laboratories")
-    private Set<User> users = new HashSet<>();
 
+    @ManyToMany(mappedBy = "dentalOffices")
+    protected Set<Laboratory> laboratories = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "laboratory_dental_office", joinColumns = @JoinColumn(name = "laboratory_id"),
-            inverseJoinColumns = @JoinColumn(name = "dental_office_id"))
-    private Set<DentalOffice> dentalOffices = new HashSet<>();
-
-    public Laboratory() {}
+    public DentalOffice() {}
 
     public Long getId() {
         return id;
@@ -78,43 +68,35 @@ public class Laboratory {
         this.id = id;
     }
 
-    public String getName() {
+    public  String getName() {
         return name;
     }
 
-    public void setName (String name) {
+    public void setName( String name) {
         this.name = name;
     }
 
-    public  String getNip() {
+    public String getNip() {
         return nip;
     }
 
-    public void setNip(String nip) {
+    public void setNip( String nip) {
         this.nip = nip;
-    }
-
-    public String getRegon() {
-        return regon;
-    }
-
-    public void setRegon(String region) {
-        this.regon = region;
     }
 
     public  String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet( String street) {
         this.street = street;
     }
 
-    public String getStreetNumber() {
+    public  String getStreetNumber() {
         return streetNumber;
     }
 
-    public void setStreetNumber( String streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
@@ -130,7 +112,7 @@ public class Laboratory {
         return postalCode;
     }
 
-    public void setPostalCode( String postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
@@ -138,11 +120,11 @@ public class Laboratory {
         return city;
     }
 
-    public void setCity( String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public String getEmail() {
+    public  String getEmail() {
         return email;
     }
 
@@ -154,38 +136,24 @@ public class Laboratory {
         return phone;
     }
 
-    public void setPhone( String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<Laboratory> getLaboratories() {
+        return laboratories;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public String getFullAdress(){
-        return street + " " + streetNumber + " " + localeNumber + " " + postalCode + " " + city;
-    }
-
-
-    public Set<DentalOffice> getDentalOffices() {
-        return dentalOffices;
-    }
-
-    public void setDentalOffices(Set<DentalOffice> dentalOffices) {
-        this.dentalOffices = dentalOffices;
+    public void setLaboratories(Set<Laboratory> laboratories) {
+        this.laboratories = laboratories;
     }
 
     @Override
     public String toString() {
-        return "Laboratory{" +
+        return "DentalOffice{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", nip='" + nip + '\'' +
-                ", region='" + regon + '\'' +
                 ", street='" + street + '\'' +
                 ", streetNumber='" + streetNumber + '\'' +
                 ", localeNumber='" + localeNumber + '\'' +
