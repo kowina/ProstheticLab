@@ -68,6 +68,14 @@ public class Laboratory {
             inverseJoinColumns = @JoinColumn(name = "dental_office_id"))
     private Set<DentalOffice> dentalOffices = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "laboratory_dentist", joinColumns = @JoinColumn(name = "laboratory_id"),
+            inverseJoinColumns = @JoinColumn(name = "dentist_id"))
+    private Set<Dentist> dentists = new HashSet<>();
+
+    @OneToMany(mappedBy = "laboratory")
+    private Set<Patient> patients = new HashSet<>();
+
     public Laboratory() {}
 
     public Long getId() {
@@ -178,6 +186,23 @@ public class Laboratory {
     public void setDentalOffices(Set<DentalOffice> dentalOffices) {
         this.dentalOffices = dentalOffices;
     }
+
+    public Set<Dentist> getDentists() {
+        return dentists;
+    }
+
+    public void setDentists(Set<Dentist> dentists) {
+        this.dentists = dentists;
+    }
+
+    public Set<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(Set<Patient> patients) {
+        this.patients = patients;
+    }
+
 
     @Override
     public String toString() {

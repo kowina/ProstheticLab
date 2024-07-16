@@ -56,7 +56,15 @@ public class DentalOffice {
 
 
     @ManyToMany(mappedBy = "dentalOffices")
-    protected Set<Laboratory> laboratories = new HashSet<>();
+    private Set<Laboratory> laboratories = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "dental_office_dentist", joinColumns = @JoinColumn(name = "dental_office_id"),
+            inverseJoinColumns = @JoinColumn(name = "dentist_id"))
+    private Set<Dentist> dentists = new HashSet<>();
+
+    @OneToMany(mappedBy = "dentalOffice")
+    private Set<Patient> patients = new HashSet<>();
 
     public DentalOffice() {}
 
@@ -147,6 +155,24 @@ public class DentalOffice {
     public void setLaboratories(Set<Laboratory> laboratories) {
         this.laboratories = laboratories;
     }
+
+    public Set<Dentist> getDentists() {
+        return dentists;
+    }
+
+    public void setDentists(Set<Dentist> dentists) {
+        this.dentists = dentists;
+    }
+
+    public Set<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(Set<Patient> patients) {
+        this.patients = patients;
+    }
+
+
 
     @Override
     public String toString() {
