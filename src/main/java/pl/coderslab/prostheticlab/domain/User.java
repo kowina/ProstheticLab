@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -29,12 +30,21 @@ public class User {
     private String email;
 
     @NotBlank
-    @Column
     @Size(min = 5, message = "hasło musi mieć co najmniej 5 liter")
     private String password;
 
-    @Column
+
     private boolean enabled;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_laboratory", joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "laboratory_id"))
+    private Set<Laboratory> laboratories;
 
     public User() {
     }
@@ -63,6 +73,14 @@ public class User {
         return enabled;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public Set<Laboratory> getLaboratories() {
+        return laboratories;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -85,6 +103,14 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setLaboratories(Set<Laboratory> laboratories) {
+        this.laboratories = laboratories;
     }
 
     @Override
