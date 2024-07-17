@@ -24,6 +24,8 @@ public class Offer {
     @Column(name = "unit_price")
     private int unitPrice;
 
+    private boolean defaulted;
+
     public Offer() {}
 
     public Long getId() {
@@ -48,6 +50,14 @@ public class Offer {
 
     public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public boolean isDefaulted() {
+        return defaulted;
+    }
+
+    public void setDefaulted(boolean defaulted) {
+        this.defaulted = defaulted;
     }
 
     @Override
