@@ -34,6 +34,9 @@ public class Patient {
     @ManyToOne
     private Laboratory laboratory;
 
+    @OneToMany(mappedBy = "patient")
+    private Set<Work> works = new HashSet<>();
+
     public Patient() {}
 
     public Long getId() {
@@ -82,6 +85,14 @@ public class Patient {
 
     public void setLaboratory(Laboratory laboratory) {
         this.laboratory = laboratory;
+    }
+
+    public Set<Work> getWorks() {
+        return works;
+    }
+
+    public void setWorks(Set<Work> works) {
+        this.works = works;
     }
 
     @Override

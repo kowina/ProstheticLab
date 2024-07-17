@@ -31,6 +31,9 @@ public class Dentist {
     @OneToMany(mappedBy = "dentist")
     private Set<Patient> patients = new HashSet<>();
 
+    @OneToMany(mappedBy = "dentist")
+    private Set<Work> works = new HashSet<>();
+
     public Dentist() {}
 
     public Long getId() {
@@ -71,6 +74,14 @@ public class Dentist {
 
     public void setPatients(Set<Patient> patients) {
         this.patients = patients;
+    }
+
+    public Set<Work> getWorks() {
+        return works;
+    }
+
+    public void setWorks(Set<Work> works) {
+        this.works = works;
     }
 
     @Override
