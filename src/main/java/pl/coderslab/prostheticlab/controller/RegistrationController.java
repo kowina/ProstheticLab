@@ -11,6 +11,7 @@ import pl.coderslab.prostheticlab.domain.User;
 @Controller
 public class RegistrationController {
 
+
     @RequestMapping(value = {"/registration"}, method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("user", new User());
