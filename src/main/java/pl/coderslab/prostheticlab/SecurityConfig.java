@@ -44,10 +44,10 @@ public UserDetailsService users() {
             .build();
     return new InMemoryUserDetailsManager(user, admin);
 }
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
