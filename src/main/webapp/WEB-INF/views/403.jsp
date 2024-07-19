@@ -5,6 +5,8 @@
     <title>Security with Spring Boot</title>
 </head>
 <body>
-<h1>Dostęp zabroniony</h1>
+<div>
+    <p style="color: red; font-weight: bold;" >Brak uprawnień.</p>
+</div>
 </body>
 </html>
