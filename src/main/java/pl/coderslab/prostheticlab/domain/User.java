@@ -15,6 +15,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true, length = 60)
+    private String username;
+
     @NotBlank
     @Size(min = 3, message = "imię musi mieć przynajmniej 3 litery")
     @Column(name = "first_name")
