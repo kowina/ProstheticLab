@@ -24,7 +24,8 @@
     <form:errors path="email"/>
     <br>
     <label>
-        Password: <form:input path="password"/>
+        Password:
+        <form:password path="password" />
     </label>
     <form:errors path="password"/>
     <form:button>Zapisz</form:button>
