@@ -7,6 +7,7 @@
     <title>About</title>
 </head>
 <body>
+<h3>Cześć ${user.firstName}</h3>
 <h3>Here you can find some details for logged users</h3>
 <sec:authorize access="isAuthenticated()">
 <form  method="post" action="/logout">
