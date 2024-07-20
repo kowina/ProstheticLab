@@ -61,19 +61,16 @@ public class Laboratory {
 
     @ManyToMany(mappedBy = "laboratories")
     private Set<User> users = new HashSet<>();
-
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "laboratory_dental_office", joinColumns = @JoinColumn(name = "laboratory_id"),
-            inverseJoinColumns = @JoinColumn(name = "dental_office_id"))
+    @OneToMany
+    @JoinColumn(name = "id_laboratory")
     private Set<DentalOffice> dentalOffices = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "laboratory_dentist", joinColumns = @JoinColumn(name = "laboratory_id"),
-            inverseJoinColumns = @JoinColumn(name = "dentist_id"))
+    @OneToMany
+    @JoinColumn(name = "id_laboratory")
     private Set<Dentist> dentists = new HashSet<>();
 
-    @OneToMany(mappedBy = "laboratory")
+    @OneToMany
+    @JoinColumn(name = "id_laboratory")
     private Set<Patient> patients = new HashSet<>();
 
     @OneToMany(mappedBy = "laboratory")
