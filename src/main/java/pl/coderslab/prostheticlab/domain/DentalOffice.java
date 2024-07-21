@@ -54,16 +54,12 @@ public class DentalOffice {
     @Size(min = 9, max = 9, message = "podaj poprawny numer telefonu")
     private String phone;
 
-
-    @ManyToMany(mappedBy = "dentalOffices")
-    private Set<Laboratory> laboratories = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "dental_office_dentist", joinColumns = @JoinColumn(name = "dental_office_id"),
-            inverseJoinColumns = @JoinColumn(name = "dentist_id"))
+    @OneToMany
+    @JoinColumn(name = "id_dental_office")
     private Set<Dentist> dentists = new HashSet<>();
 
-    @OneToMany(mappedBy = "dentalOffice")
+    @OneToMany
+    @JoinColumn(name = "id_dental_office")
     private Set<Patient> patients = new HashSet<>();
 
     @OneToMany(mappedBy = "dentalOffice")
@@ -149,14 +145,6 @@ public class DentalOffice {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Set<Laboratory> getLaboratories() {
-        return laboratories;
-    }
-
-    public void setLaboratories(Set<Laboratory> laboratories) {
-        this.laboratories = laboratories;
     }
 
     public Set<Dentist> getDentists() {

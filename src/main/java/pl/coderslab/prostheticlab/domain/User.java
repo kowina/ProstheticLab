@@ -1,5 +1,7 @@
 package pl.coderslab.prostheticlab.domain;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -57,6 +59,9 @@ public class User {
         return id;
     }
 
+    public String getUsername() {
+        return username;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -89,7 +94,11 @@ public class User {
         this.id = id;
     }
 
-    public void setFirstName( String firstName) {
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -116,6 +125,7 @@ public class User {
     public void setLaboratories(Set<Laboratory> laboratories) {
         this.laboratories = laboratories;
     }
+
 
     @Override
     public String toString() {

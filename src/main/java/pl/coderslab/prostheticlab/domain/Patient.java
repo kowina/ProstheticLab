@@ -25,15 +25,6 @@ public class Patient {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToOne
-    private DentalOffice dentalOffice;
-
-    @ManyToOne
-    private Dentist dentist;
-
-    @ManyToOne
-    private Laboratory laboratory;
-
     @OneToMany(mappedBy = "patient")
     private Set<Work> works = new HashSet<>();
 
@@ -63,30 +54,6 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public DentalOffice getDentalOffice() {
-        return dentalOffice;
-    }
-
-    public void setDentalOffice(DentalOffice dentalOffice) {
-        this.dentalOffice = dentalOffice;
-    }
-
-    public Dentist getDentist() {
-        return dentist;
-    }
-
-    public void setDentist(Dentist dentist) {
-        this.dentist = dentist;
-    }
-
-    public Laboratory getLaboratory() {
-        return laboratory;
-    }
-
-    public void setLaboratory(Laboratory laboratory) {
-        this.laboratory = laboratory;
-    }
-
     public Set<Work> getWorks() {
         return works;
     }
@@ -101,9 +68,6 @@ public class Patient {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dentalOffice=" + dentalOffice +
-                ", dentist=" + dentist +
-                ", laboratory=" + laboratory +
                 '}';
     }
 }

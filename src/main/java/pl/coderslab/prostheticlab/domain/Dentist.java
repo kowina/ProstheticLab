@@ -25,10 +25,8 @@ public class Dentist {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToMany(mappedBy = "dentists")
-    private Set<DentalOffice> dentalOffices = new HashSet<>();
-
-    @OneToMany(mappedBy = "dentist")
+    @OneToMany
+    @JoinColumn(name = "id_dentist")
     private Set<Patient> patients = new HashSet<>();
 
     @OneToMany(mappedBy = "dentist")
@@ -60,14 +58,6 @@ public class Dentist {
         this.lastName = lastName;
     }
 
-    public Set<DentalOffice> getDentalOffices() {
-        return dentalOffices;
-    }
-
-    public void setDentalOffices(Set<DentalOffice> dentalOffices) {
-        this.dentalOffices = dentalOffices;
-    }
-
     public Set<Patient> getPatients() {
         return patients;
     }
@@ -90,7 +80,6 @@ public class Dentist {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dentalOffices=" + dentalOffices +
                 ", patients=" + patients +
                 '}';
     }

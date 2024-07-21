@@ -1,4 +1,4 @@
-package pl.coderslab.prostheticlab.controller.dentist;
+package pl.coderslab.prostheticlab.controller;
 
 
 import org.springframework.stereotype.Controller;

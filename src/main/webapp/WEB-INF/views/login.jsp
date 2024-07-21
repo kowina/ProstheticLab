@@ -17,6 +17,7 @@
             <p style="color: red; font-weight: bold;" >Błędna nazwa użytkownika lub hasło. Spróbuj ponownie.</p>
         </div>
     </c:if>
+    <a href="registration">ZAREJESTRUJ SIĘ</a>
     <div><label> User Name : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>

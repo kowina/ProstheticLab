@@ -17,12 +17,12 @@ public class WorkItem {
     @Min(value = 1, message = "musisz określić ilość")
     private int quantity;
 
+    @Column(name = "price_per_quantity")
+    private int pricePerQuantity;
+
     @ManyToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
-
-    @Column(name = "price_per_quantity")
-    private int pricePerQuantity;
 
     public WorkItem() {}
 
