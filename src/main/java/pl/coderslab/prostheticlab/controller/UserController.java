@@ -1,8 +1,7 @@
-package pl.coderslab.prostheticlab.controller.user;
+package pl.coderslab.prostheticlab.controller;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.prostheticlab.service.UserService;
 
 @Controller
