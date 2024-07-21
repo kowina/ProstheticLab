@@ -9,16 +9,24 @@ import java.util.List;
 
 @Service
 public class DentistService {
-    @Autowired
-    private DentistRepository dentistRepository;
 
     @Autowired
-    public DentistService(DentistRepository dentistRepository) {}
+    private final DentistRepository dentistRepository;
+
+    @Autowired
+    public DentistService(DentistRepository dentistRepository) {
+        this.dentistRepository = dentistRepository;
+    }
 
     public void save(Dentist dentist) {
         dentistRepository.save(dentist);
     }
+
     public List<Dentist> getAll() {
         return dentistRepository.findAll();
+    }
+
+    public void delete(Dentist dentist) {
+        dentistRepository.delete(dentist);
     }
 }

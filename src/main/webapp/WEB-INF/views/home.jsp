@@ -5,7 +5,9 @@
     <title>Home</title>
 </head>
 <body>
-<h1>home</h1>
+<h1>STRONA STARTOWA</h1>
+<a href="/registration">REJESTRACJA</a>
+<a href="/login">LOGOWANIE</a>
 <sec:authorize access="isAuthenticated()">
     <form  method="post" action="/logout">
         <input class="fa fa-id-badge" type="submit" value="Wyloguj">

@@ -1,4 +1,4 @@
-package pl.coderslab.prostheticlab.service;
+package pl.coderslab.prostheticlab.service.user;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,5 +45,10 @@ public UserServiceImpl(UserRepository userRepository, RoleRepository roleReposit
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 }

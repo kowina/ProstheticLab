@@ -1,4 +1,4 @@
-package pl.coderslab.prostheticlab.service;
+package pl.coderslab.prostheticlab.service.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
