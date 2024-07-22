@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class WorkService {
 
-    @Autowired
     private final WorkRepository workRepository;
 
     public WorkService(WorkRepository workRepository) {
@@ -22,11 +21,19 @@ public class WorkService {
         workRepository.save(work);
     }
 
-    public List<Work> getAll() {
-        return workRepository.findAll();
+    public void update(Work work) {
+        workRepository.save(work);
+    }
+
+    public Work findById(Long id) {
+        return workRepository.findById(id).orElse(null);
     }
 
     public void delete(Work work) {
         workRepository.delete(work);
+    }
+
+    public List<Work> getAll() {
+        return workRepository.findAll();
     }
 }

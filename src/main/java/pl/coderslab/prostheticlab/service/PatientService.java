@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class PatientService {
 
-    @Autowired
     private final PatientRepository patientRepository;
 
     public PatientService(PatientRepository patientRepository) {
@@ -21,11 +20,19 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
-    public List<Patient> getAll() {
-        return patientRepository.findAll();
+    public void update(Patient patient) {
+        patientRepository.save(patient);
     }
 
     public void delete(Patient patient) {
         patientRepository.delete(patient);
+    }
+
+    public Patient findById(Long id) {
+        return patientRepository.findById(id).orElse(null);
+    }
+
+    public List<Patient> getAll() {
+        return patientRepository.findAll();
     }
 }

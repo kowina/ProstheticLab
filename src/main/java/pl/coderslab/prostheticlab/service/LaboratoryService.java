@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class LaboratoryService {
 
-    @Autowired
+
     private final LaboratoryRepository laboratoryRepository;
 
     public LaboratoryService(LaboratoryRepository laboratoryRepository) {
@@ -21,12 +21,20 @@ public class LaboratoryService {
     public void save(Laboratory laboratory) {
         laboratoryRepository.save(laboratory);
     }
-    public List<Laboratory> getAll(){
-        return laboratoryRepository.findAll();
+
+    public void update(Laboratory laboratory) {
+        laboratoryRepository.save(laboratory);
     }
 
     public void delete(Laboratory laboratory) {
         laboratoryRepository.delete(laboratory);
     }
 
+    public Laboratory findById(Long id) {
+        return laboratoryRepository.findById(id).orElse(null);
+    }
+
+    public List<Laboratory> getAll(){
+        return laboratoryRepository.findAll();
+    }
 }

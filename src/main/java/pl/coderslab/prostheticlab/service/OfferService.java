@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class OfferService {
 
-    @Autowired
     private final OfferRepository offerRepository;
 
     public OfferService(OfferRepository offerRepository) {

@@ -9,7 +9,6 @@ import pl.coderslab.prostheticlab.repository.WorkItemRepository;
 @Service
 public class WorkItemService {
 
-    @Autowired
     private final WorkItemRepository workItemRepository;
 
     public WorkItemService(WorkItemRepository workItemRepository) {

@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class DentalOfficeService  {
 
-    @Autowired
     private final DentalOfficeRepository dentalOfficeRepository;
 
     public DentalOfficeService(DentalOfficeRepository dentalOfficeRepository) {
@@ -23,11 +22,20 @@ public class DentalOfficeService  {
         dentalOfficeRepository.save(dentalOffice);
     }
 
-    public List<DentalOffice> getAll() {
-        return dentalOfficeRepository.findAll();
+    public void update(DentalOffice dentalOffice) {
+        dentalOfficeRepository.save(dentalOffice);
     }
+
 
     public void delete(DentalOffice dentalOffice) {
         dentalOfficeRepository.delete(dentalOffice);
+    }
+
+    public DentalOffice getById(Long id) {
+        return dentalOfficeRepository.findById(id).orElse(null);
+    }
+
+    public List<DentalOffice> getAll() {
+        return dentalOfficeRepository.findAll();
     }
 }
