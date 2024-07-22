@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.prostheticlab.domain.Dentist;
@@ -34,6 +35,21 @@ public class DentistController {
             return "dentist/addForm";
         }
         dentistService.save(dentist);
+        return "redirect:/dentists/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editDentist(@PathVariable Long id, Model model) {
+        model.addAttribute("dentist", dentistService.findById(id));
+        return "dentist/editForm";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@Valid Dentist dentist, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "dentist/editForm";
+        }
+        dentistService.update(dentist);
         return "redirect:/dentists/list";
     }
 

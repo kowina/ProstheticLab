@@ -36,20 +36,20 @@
         <form:errors path="street"/>
     </label><br>
     <label>
-        Nr: <form:input path="street_number"/>
-        <form:errors path="street_number"/>
+        Nr: <form:input path="streetNumber"/>
+        <form:errors path="streetNumber"/>
     </label><br>
     <label>
-        Nr lokalu: <form:input path="locale_number"/>
-        <form:errors path="locale_number"/>
+        Nr lokalu: <form:input path="localeNumber"/>
+        <form:errors path="localeNumber"/>
     </label><br>
     <label>
         Miasto: <form:input path="city"/>
         <form:errors path="city"/>
     </label><br>
     <label>
-        Kod pocztowy: <form:input path="postal_code"/>
-        <form:errors path="postal_code"/>
+        Kod pocztowy: <form:input path="postalCode"/>
+        <form:errors path="postalCode"/>
     </label><br>
 
     <form:button>Zapisz</form:button>

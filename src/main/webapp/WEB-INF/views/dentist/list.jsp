@@ -23,7 +23,7 @@
                     <td>${dentist.firstName}</td>
                     <td>${dentist.lastName}</td>
                     <td>
-<%--                        <a href="/authors/edit/${author.id}">Edit</a>--%>
+                        <a href="/dentists/edit/${dentist.id}">Edit</a>
 <%--                        <a href="/authors/confirmDel/${author.id}">Delete</a>--%>
                     </td>
                 </tr>
