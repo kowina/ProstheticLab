@@ -1,4 +1,4 @@
-package pl.coderslab.prostheticlab.service;
+package pl.coderslab.prostheticlab.service.user;
 
 import pl.coderslab.prostheticlab.domain.User;
 
@@ -9,4 +9,6 @@ public interface UserService {
     User findByEmail(String email);
 
     void saveUser(User user);
+
+    void deleteUser(User user);
 }

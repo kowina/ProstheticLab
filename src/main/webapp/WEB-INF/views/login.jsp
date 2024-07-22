@@ -17,10 +17,11 @@
             <p style="color: red; font-weight: bold;" >Błędna nazwa użytkownika lub hasło. Spróbuj ponownie.</p>
         </div>
     </c:if>
-    <a href="registration">ZAREJESTRUJ SIĘ</a>
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+    <a href="/registration">ZAREJESTRUJ SIĘ</a>
+    <h3>LOGOWANIE</h3>
+    <div><label> TWÓJ EMAIL: <input type="text" name="username"/> </label></div>
+    <div><label> HASŁO: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="ZALOGUJ SIĘ"/></div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 
