@@ -3,12 +3,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Form add dentist</title>
+    <title>Form add laboratory</title>
 </head>
 <body>
-<h1>DODAWANIE LABORATORIUM</h1>
+<%@ include file="../menu.jsp" %>
 
-<form:form modelAttribute="laboratory" action="/laboratories/add" method="post">
+<h1>STWÓRZ SWOJE LABORATORIUM</h1>
+
+<form:form modelAttribute="laboratory" action="/app/laboratories/add" method="post">
     <form:hidden path="id"/>
     <label>
         Nazwa: <form:input path="name"/>
@@ -36,20 +38,20 @@
         <form:errors path="street"/>
     </label><br>
     <label>
-        Nr: <form:input path="street_number"/>
-        <form:errors path="street_number"/>
+        Nr: <form:input path="streetNumber"/>
+        <form:errors path="streetNumber"/>
     </label><br>
     <label>
-        Nr lokalu: <form:input path="locale_number"/>
-        <form:errors path="locale_number"/>
+        Nr lokalu: <form:input path="localeNumber"/>
+        <form:errors path="localeNumber"/>
     </label><br>
     <label>
         Miasto: <form:input path="city"/>
         <form:errors path="city"/>
     </label><br>
     <label>
-        Kod pocztowy: <form:input path="postal_code"/>
-        <form:errors path="postal_code"/>
+        Kod pocztowy: <form:input path="postalCode"/>
+        <form:errors path="postalCode"/>
     </label><br>
 
     <form:button>Zapisz</form:button>

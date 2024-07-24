@@ -1,10 +1,8 @@
 package pl.coderslab.prostheticlab.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.prostheticlab.domain.DentalOffice;
-import pl.coderslab.prostheticlab.domain.Dentist;
 import pl.coderslab.prostheticlab.repository.DentalOfficeRepository;
 
 import java.util.List;

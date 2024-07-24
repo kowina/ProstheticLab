@@ -11,20 +11,25 @@ import pl.coderslab.prostheticlab.service.user.CurrentUser;
 public class HomeController {
 
     @RequestMapping("/")
-    //@ResponseBody
     public String home(Model model) {
         return "home";
     }
 
-    @GetMapping("/about")
-
-    public String about(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    @GetMapping("/app")
+    public String app(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("user", customUser.getUser());
-        if(customUser.getUsername().equals("admin")) {
-            return "redirect:admin/panel";
-        }else {
 
-            return "about";
+        if (customUser.getUsername().equals("admin")) {
+            return "redirect:admin/panel";
+        }
+
+        if (customUser.getUser().getLaboratories().isEmpty()) {
+            return "redirect:/app/laboratories/add";
+
+        }else {
+            return "redirect:/app/laboratories/list/" + customUser.getUser().getId();
+
         }
     }
+
 }
