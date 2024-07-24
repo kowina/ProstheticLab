@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -6,8 +7,9 @@
     <title>List Dentists</title>
 </head>
 <body>
+<%@ include file="../menu.jsp" %>
 
-<h1>Lista Dentystów</h1>
+<h1>LISTA DENTYSTÓW</h1>
     <table>
         <thead>
             <tr>
@@ -23,7 +25,7 @@
                     <td>${dentist.firstName}</td>
                     <td>${dentist.lastName}</td>
                     <td>
-                        <a href="/dentists/edit/${dentist.id}">Edit</a>
+                        <a href="/app/dentists/edit/${dentist.id}">Edit</a>
 <%--                        <a href="/authors/confirmDel/${author.id}">Delete</a>--%>
                     </td>
                 </tr>

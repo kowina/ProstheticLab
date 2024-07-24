@@ -6,9 +6,11 @@
     <title>Form add laboratory</title>
 </head>
 <body>
-<h1>DODAWANIE LABORATORIUM</h1>
+<%@ include file="../menu.jsp" %>
 
-<form:form modelAttribute="laboratory" action="/laboratories/add" method="post">
+<h1>STWÓRZ SWOJE LABORATORIUM</h1>
+
+<form:form modelAttribute="laboratory" action="/app/laboratories/add" method="post">
     <form:hidden path="id"/>
     <label>
         Nazwa: <form:input path="name"/>

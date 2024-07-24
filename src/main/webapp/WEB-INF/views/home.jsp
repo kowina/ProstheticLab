@@ -7,7 +7,11 @@
 <body>
 <h1>STRONA STARTOWA</h1>
 <a href="/registration">REJESTRACJA</a>
+
 <a href="/login">LOGOWANIE</a>
+
+<a href="/app/laboratories/list">TWOJE LABORATORIUM</a>
+
 <sec:authorize access="isAuthenticated()">
     <form  method="post" action="/logout">
         <input class="fa fa-id-badge" type="submit" value="Wyloguj">

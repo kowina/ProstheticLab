@@ -6,9 +6,12 @@
     <title>Form edit laboratory</title>
 </head>
 <body>
+<%@ include file="../menu.jsp" %>
+
 <h1>EDYCJA LABORATORIUM</h1>
 
-<form:form modelAttribute="laboratory" action="/laboratories/edit" method="post">
+
+<form:form modelAttribute="laboratory" action="/app/laboratories/edit" method="post">
     <form:hidden path="id"/>
     <label>
         Nazwa: <form:input path="name"/>

@@ -1,42 +1,68 @@
 package pl.coderslab.prostheticlab.controller;
 
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.prostheticlab.domain.Dentist;
 import pl.coderslab.prostheticlab.domain.Laboratory;
+import pl.coderslab.prostheticlab.domain.User;
 import pl.coderslab.prostheticlab.service.LaboratoryService;
+import pl.coderslab.prostheticlab.service.user.CurrentUser;
+import pl.coderslab.prostheticlab.service.user.UserServiceImpl;
 
+import javax.swing.*;
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
-@RequestMapping("/laboratories")
+@RequestMapping("/app/laboratories")
 public class LaboratoryController {
 
     private final LaboratoryService laboratoryService;
 
-    public LaboratoryController(LaboratoryService laboratoryService) {
+    private final UserServiceImpl userService;
+
+    public LaboratoryController(LaboratoryService laboratoryService, UserServiceImpl userService) {
         this.laboratoryService = laboratoryService;
+        this.userService = userService;
+    }
+
+    @ModelAttribute("users")
+    public List<User> getUsers() {
+        return userService.findAll();
     }
 
     @GetMapping("/add")
-    public String addLaboratory(Model model) {
+    public String addLaboratory(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("laboratory", new Laboratory());
+
         return "laboratory/addForm";
+
     }
 
     @PostMapping("/add")
-    public String add(@Valid Laboratory laboratory, BindingResult bindingResult) {
+    public String add(@Valid Laboratory laboratory, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser customUser) {
         if (bindingResult.hasErrors()) {
             return "laboratory/addForm";
         }
+        User user = customUser.getUser();
+        Set<Laboratory> laboratories = user.getLaboratories();
+        if (laboratories != null) {
+            laboratories.add(laboratory);
+        }else {
+            laboratories = new HashSet<>();
+            laboratories.add(laboratory);
+        }
+        user.setLaboratories(laboratories);
+        userService.update(user);
         laboratoryService.save(laboratory);
-        return "redirect:/laboratories/list";
+        return "redirect:/app/laboratories/list/"+user.getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -46,17 +72,47 @@ public class LaboratoryController {
     }
 
     @PostMapping("/edit")
-    public String edit(@Valid Laboratory laboratory, BindingResult bindingResult) {
+    public String edit(@Valid Laboratory laboratory, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser customUser) {
         if (bindingResult.hasErrors()) {
             return "laboratory/editForm";
         }
         laboratoryService.update(laboratory);
-        return "redirect:/laboratories/list";
+        return "redirect:/app/laboratories/list/"+customUser.getUser().getId();
     }
 
     @GetMapping("/list")
     public String listLaboratory(Model model) {
         model.addAttribute("laboratories", laboratoryService.getAll());
+        return "laboratory/adminList";
+    }
+
+    @GetMapping("/list/{id}")
+    public String listLaboratoryByUser(@PathVariable Long id, Model model) {
+        model.addAttribute("laboratories", userService.findById(id).getLaboratories());
         return "laboratory/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id, @AuthenticationPrincipal CurrentUser customUser) {
+        User user = customUser.getUser();
+        Set<Laboratory> laboratories = userService.findById(user.getId()).getLaboratories();
+        laboratories.remove(laboratoryService.findById(id));
+        user.setLaboratories(laboratories);
+        userService.update(user);
+
+        laboratoryService.deleteById(id);
+        return "redirect:/app/laboratories/list/"+customUser.getUser().getId();
+    }
+
+    @GetMapping("/confirmDelete/{id}")
+    public String confirmDelete(@PathVariable Long id, Model model) {
+        model.addAttribute("laboratory", laboratoryService.findById(id));
+        return "laboratory/confirmDel";
+    }
+
+    @GetMapping("get/{id}")
+    public String get(@PathVariable Long id, Model model) {
+        model.addAttribute("laboratory", laboratoryService.findById(id));
+        return "laboratory/details";
     }
 }

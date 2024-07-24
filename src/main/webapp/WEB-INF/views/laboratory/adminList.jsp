@@ -7,27 +7,25 @@
 </head>
 <body>
 <%@ include file="../menu.jsp" %>
-<br>
 
 <h1>LISTA LABORATORIÓW</h1>
-<a href="/app/laboratories/add">DODAJ LABORATORIUM</a>
-
 <table>
     <thead>
     <tr>
+        <th>Id</th>
         <th>Nazwa</th>
+        <th>URZYTKOWNICY</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${laboratories}" var="laboratory">
         <tr>
+            <td>${laboratory.id}</td>
             <td>${laboratory.name}</td>
+            <td>${laboratory.users}</td>
             <td>
-<%--                                            <a href="/app/laboratories/edit/${laboratory.id}">EDYTUJ</a>--%>
-<%--                                            <a href="/app/laboratories/delete/${laboratory.id}">USUŃ</a>--%>
-                                            <a href="/app/laboratories/get/${laboratory.id}">SZCZEGÓŁY</a>
-
-
+                                            <a href="/app/laboratories/get/${laboratory.id}">Szczegóły</a>
+                    <%--                        <a href="/authors/confirmDel/${author.id}">Delete</a>--%>
             </td>
         </tr>
     </c:forEach>
@@ -35,4 +33,5 @@
 </table>
 </body>
 </html>
+
 

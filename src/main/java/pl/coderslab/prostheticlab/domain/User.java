@@ -1,5 +1,8 @@
 package pl.coderslab.prostheticlab.domain;
 
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
@@ -10,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+
 @Table(name = "users")
 public class User {
 
@@ -50,6 +54,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_laboratory", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "laboratory_id"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Laboratory> laboratories = new HashSet<>();
 
     public User() {

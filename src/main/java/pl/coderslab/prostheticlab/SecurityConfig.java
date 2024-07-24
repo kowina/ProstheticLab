@@ -51,9 +51,9 @@ public class SecurityConfig {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                .antMatchers("/about/**").authenticated()
+                .antMatchers("/app/**").authenticated()
                 .and().formLogin().loginPage("/login")
-                .defaultSuccessUrl("/about")
+                .defaultSuccessUrl("/app")
                 .and().logout().logoutSuccessUrl("/login")
                 .permitAll()
                 .and().exceptionHandling().accessDeniedPage("/403");

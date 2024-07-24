@@ -1,6 +1,9 @@
 package pl.coderslab.prostheticlab.domain;
 
 
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.pl.NIP;
 import org.hibernate.validator.constraints.pl.REGON;
 
@@ -60,6 +63,7 @@ public class Laboratory {
     private String phone;
 
     @ManyToMany(mappedBy = "laboratories")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<User> users = new HashSet<>();
     @OneToMany
     @JoinColumn(name = "id_laboratory")

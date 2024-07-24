@@ -14,7 +14,7 @@ import pl.coderslab.prostheticlab.service.DentistService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/dentists")
+@RequestMapping("/app/dentists")
 public class DentistController {
     private final DentistService dentistService;
 
@@ -35,7 +35,7 @@ public class DentistController {
             return "dentist/addForm";
         }
         dentistService.save(dentist);
-        return "redirect:/dentists/list";
+        return "redirect:/app/dentists/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -50,7 +50,7 @@ public class DentistController {
             return "dentist/editForm";
         }
         dentistService.update(dentist);
-        return "redirect:/dentists/list";
+        return "redirect:/app/dentists/list";
     }
 
     @GetMapping("/list")

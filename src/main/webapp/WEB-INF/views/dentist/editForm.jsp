@@ -6,9 +6,11 @@
     <title>Form edit dentist</title>
 </head>
 <body>
-<h1>EDytowanie DENTYSTY</h1>
+<%@ include file="../menu.jsp" %>
 
-<form:form modelAttribute="dentist" action="/dentists/edit" method="post">
+<h1>EDYTOWANIEDENTYSTY</h1>
+
+<form:form modelAttribute="dentist" action="/app/dentists/edit" method="post">
     <form:hidden path="id"/>
     <label>
         Imię: <form:input path="firstName"/>
