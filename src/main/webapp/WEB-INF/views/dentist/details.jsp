@@ -4,15 +4,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista lekarzy</title>
+    <title>Szczegóły Lekarza</title>
 </head>
 <body>
 <a href="/app/laboratories/choice/+<sec:authentication property="principal.user.id"/>">PRZEŁĄCZ LABORATORIUM</a>
 
 <%@ include file="../menu.jsp" %>
 <br>
-<h1>LISTA LEKARZY</h1>
-    <table>
+
+<h1>SZCZEGÓŁY LEKARZA</h1>
+
+ <table>
         <thead>
             <tr>
                 <th>Imię</th>
@@ -20,15 +22,14 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${dentists}" var="dentist">
                 <tr>
                     <td>${dentist.firstName}</td>
                     <td>${dentist.lastName}</td>
                     <td>
-                         <a href="/app/dentists/get/${dentist.id}/${laboratory.id}">SZCZEGÓŁY</a>
+                          <a href="/app/dentists/edit/${dentist.id}/${laboratory.id}">EDYTUJ</a>
+                          <a href="/app/dentists/confirmDelete/${dentist.id}/${laboratory.id}">USUŃ</a>
                     </td>
                 </tr>
-            </c:forEach>
         </tbody>
     </table>
 </body>

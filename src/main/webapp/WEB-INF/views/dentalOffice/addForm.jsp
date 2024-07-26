@@ -1,16 +1,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Form add dentaloffice</title>
+    <title>Form add dentist</title>
 </head>
 <body>
 <a href="/app/laboratories/choice/+<sec:authentication property="principal.user.id"/>">PRZEŁĄCZ LABORATORIUM</a>
 
 <%@ include file="../menu.jsp" %>
 
-<h1>DODANIE GABINETU</h1>
+<h1>DODANIE LEKARZA</h1>
 
 <form:form modelAttribute="dentalOffice" action="/app/dentalOffices/add/${laboratory.id}" method="post">
     <form:hidden path="id"/>
