@@ -24,7 +24,19 @@ public class OfferService {
     public List<Offer> getAll() {
         return offerRepository.findAll();
     }
+
+    public Offer getById(Long id) {
+        return offerRepository.findById(id).orElse(null);
+    }
+
      public void delete(Offer offer) {
         offerRepository.delete(offer);
+     }
+
+     public void deleteById(Long id) {
+        offerRepository.deleteById(id);
+     }
+     public void update(Offer offer) {
+        offerRepository.save(offer);
      }
 }

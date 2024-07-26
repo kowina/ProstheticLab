@@ -16,8 +16,10 @@
 <a href="/app/laboratories/get/${laboratory.id}">TWOJE LABORATORIUM</a>
 <a href="/app/dentalOffices/list/${laboratory.id}">GABINETY</a>
 <a href="/app/dentists/list/${laboratory.id}">LEKARZE</a>
-<a href="">TWOJA OFERTA</a><br>
+<a href="/app/offers/list/${laboratory.id}">TWOJA OFERTA</a><br>
 
 <a href="/app/dentalOffices/add/${laboratory.id}">DODAJ GABINET</a>
 <a href="/app/dentists/add/${laboratory.id}">DODAJ LEKARZA</a>
+<a href="/app/offers/add/${laboratory.id}">DODAJ DO OFERTY</a>
+
 

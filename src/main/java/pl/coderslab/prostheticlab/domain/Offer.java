@@ -2,10 +2,7 @@ package pl.coderslab.prostheticlab.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,10 +15,10 @@ public class Offer {
     private Long id;
 
     @NotBlank
-    @Size(min = 2, message = "nazwa musi mieć przynajmniej 2 znaki")
+   // @Size(min = 2, message = "nazwa musi mieć przynajmniej 2 znaki")
     private String name;
 
-    @NotBlank
+    @NotNull
     @Min(value = 1, message = "cena musi być wieksza od 0")
     @Column(name = "unit_price")
     private int unitPrice;
