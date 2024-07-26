@@ -6,16 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.prostheticlab.domain.Dentist;
 import pl.coderslab.prostheticlab.domain.Laboratory;
 import pl.coderslab.prostheticlab.domain.User;
 import pl.coderslab.prostheticlab.service.LaboratoryService;
 import pl.coderslab.prostheticlab.service.user.CurrentUser;
 import pl.coderslab.prostheticlab.service.user.UserServiceImpl;
 
-import javax.swing.*;
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,9 +30,29 @@ public class LaboratoryController {
         this.userService = userService;
     }
 
+
     @ModelAttribute("users")
     public List<User> getUsers() {
         return userService.findAll();
+    }
+
+    @GetMapping("/choice/{id}")
+    public String choice(@PathVariable Long id, Model model) {
+        Set<Laboratory> userLaboratories = userService.findById(id).getLaboratories();
+        model.addAttribute("laboratories", userLaboratories);
+        if(userLaboratories.size() == 1){
+            Laboratory userLaboratory = userLaboratories.iterator().next();
+            model.addAttribute("laboratory", userLaboratory);
+        return "redirect:/app/laboratories/home/"+userLaboratory.getId();
+        }
+        return "laboratory/choice";
+    }
+
+    @GetMapping("/home/{id}")
+    public String home(@PathVariable Long id, Model model) {
+        model.addAttribute("laboratory", laboratoryService.findById(id));
+        return "laboratory/homeLab";
+
     }
 
     @GetMapping("/add")
@@ -62,7 +79,7 @@ public class LaboratoryController {
         user.setLaboratories(laboratories);
         userService.update(user);
         laboratoryService.save(laboratory);
-        return "redirect:/app/laboratories/list/"+user.getId();
+        return "redirect:/app/laboratories/choice/"+user.getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -77,7 +94,7 @@ public class LaboratoryController {
             return "laboratory/editForm";
         }
         laboratoryService.update(laboratory);
-        return "redirect:/app/laboratories/list/"+customUser.getUser().getId();
+        return "redirect:/app/laboratories/get/"+laboratory.getId();
     }
 
     @GetMapping("/list")
@@ -101,7 +118,7 @@ public class LaboratoryController {
         userService.update(user);
 
         laboratoryService.deleteById(id);
-        return "redirect:/app/laboratories/list/"+customUser.getUser().getId();
+        return "redirect:/app/laboratories/choice/"+customUser.getUser().getId();
     }
 
     @GetMapping("/confirmDelete/{id}")
@@ -113,6 +130,7 @@ public class LaboratoryController {
     @GetMapping("get/{id}")
     public String get(@PathVariable Long id, Model model) {
         model.addAttribute("laboratory", laboratoryService.findById(id));
+//        model.addAttribute("laboratoryName", laboratoryService.findById(id).getName());
         return "laboratory/details";
     }
 }

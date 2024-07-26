@@ -9,10 +9,10 @@
 <h3>Cześć <sec:authentication property="principal.user.firstName"/></h3>
 <%--<p>Zalogowany jako: <sec:authentication property="principal.user.firstName"/></p>--%>
 <sec:authorize access="isAuthenticated()">
-    <form  method="post" action="/logout">
-        <input class="fa fa-id-badge" type="submit" value="Wyloguj">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
+<form  method="post" action="/logout">
+    <input class="fa fa-id-badge" type="submit" value="Wyloguj">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form>
     <%--    <p>Zalogowany jako: <sec:authentication property="principal.user.firstName"/></p>--%>
     <%--    <p>Posiada role: <sec:authentication property="authorities"/></p>--%>
 </sec:authorize>
@@ -21,23 +21,21 @@
 <a href="/app/dentists/list">LEKARZE</a>
 <a href="">TWOJA OFERTA</a>
 
-<h1>LISTA LABORATORIÓW</h1>
+<h1>LISTA GABINETÓW</h1>
 <table>
     <thead>
     <tr>
         <th>Id</th>
         <th>Nazwa</th>
-        <th>URZYTKOWNICY</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${laboratories}" var="laboratory">
+    <c:forEach items="${dentalOffices}" var="dentalOffice">
         <tr>
-            <td>${laboratory.id}</td>
-            <td>${laboratory.name}</td>
-            <td>${laboratory.users.name}</td>
+            <td>${dentalOffice.id}</td>
+            <td>${dentalOffice.name}</td>
             <td>
-                                            <a href="/app/laboratories/get/${laboratory.id}">Szczegóły</a>
+                <a href="/app/dentalOffices/get/${dentalOffice.id}">Szczegóły</a>
                     <%--                        <a href="/authors/confirmDel/${author.id}">Delete</a>--%>
             </td>
         </tr>
@@ -46,5 +44,3 @@
 </table>
 </body>
 </html>
-
-

@@ -1,11 +1,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>admin panel</title>
+    <title>Wybór laboratorium</title>
 </head>
 <body>
-<h3>Panel administratora</h3>
 <h3>Cześć <sec:authentication property="principal.user.firstName"/></h3>
 <%--<p>Zalogowany jako: <sec:authentication property="principal.user.firstName"/></p>--%>
 <sec:authorize access="isAuthenticated()">
@@ -16,35 +17,28 @@
     <%--    <p>Zalogowany jako: <sec:authentication property="principal.user.firstName"/></p>--%>
     <%--    <p>Posiada role: <sec:authentication property="authorities"/></p>--%>
 </sec:authorize>
-<a href="/app/laboratories/list">LABORATORIA</a>
-<a href="/app/dentalOffices/list">GABINETY</a>
-<a href="/app/dentists/list">LEKARZE</a>
-<a href="">TWOJA OFERTA</a>
 
-<h1>LISTA LABORATORIÓW</h1>
+<h1>WYBIERZ LABORATORIUM</h1>
 <table>
     <thead>
     <tr>
-        <th>Id</th>
-        <th>Nazwa</th>
-        <th>URZYTKOWNICY</th>
+        <th>Laboratorium</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${laboratories}" var="laboratory">
         <tr>
-            <td>${laboratory.id}</td>
-            <td>${laboratory.name}</td>
-            <td>${laboratory.users.name}</td>
+            <td><a href="/app/laboratories/home/${laboratory.id}">${laboratory.name}</a> </td>
             <td>
-                                            <a href="/app/laboratories/get/${laboratory.id}">Szczegóły</a>
-                    <%--                        <a href="/authors/confirmDel/${author.id}">Delete</a>--%>
+                    <%--                                            <a href="/app/laboratories/edit/${laboratory.id}">EDYTUJ</a>--%>
+                    <%--                                            <a href="/app/laboratories/delete/${laboratory.id}">USUŃ</a>--%>
+<%--                <a href="/app/laboratories/get/${laboratory.id}">SZCZEGÓŁY</a>--%>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+
 </body>
 </html>
-
-

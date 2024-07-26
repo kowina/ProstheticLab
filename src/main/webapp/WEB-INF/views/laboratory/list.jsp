@@ -26,8 +26,6 @@
 <%--                                            <a href="/app/laboratories/edit/${laboratory.id}">EDYTUJ</a>--%>
 <%--                                            <a href="/app/laboratories/delete/${laboratory.id}">USUŃ</a>--%>
                                             <a href="/app/laboratories/get/${laboratory.id}">SZCZEGÓŁY</a>
-
-
             </td>
         </tr>
     </c:forEach>
