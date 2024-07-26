@@ -50,8 +50,8 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/app/**").authenticated()
+                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/app")
                 .and().logout().logoutSuccessUrl("/login")

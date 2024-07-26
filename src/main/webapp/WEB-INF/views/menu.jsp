@@ -11,7 +11,11 @@
 <%--    <p>Zalogowany jako: <sec:authentication property="principal.user.firstName"/></p>--%>
 <%--    <p>Posiada role: <sec:authentication property="authorities"/></p>--%>
 </sec:authorize>
-<a href="/app/laboratories/list/<sec:authentication property="principal.user.id"/>">TWOJE LABORATORIUM</a>
-<a href="">GABINETY</a>
+<h1>${laboratory.name}</h1>
+ <br>
+<a href="/app/laboratories/get/${laboratory.id}">TWOJE LABORATORIUM</a>
+<a href="/app/dentalOffices/list/${laboratory.id}">GABINETY</a>
 <a href="/app/dentists/list">LEKARZE</a>
-<a href="">TWOJA OFERTA</a>
+<a href="">TWOJA OFERTA</a><br>
+
+<a href="/app/dentalOffices/add/${laboratory.id}">DODAJ GABINET</a>

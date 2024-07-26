@@ -2,12 +2,14 @@ package pl.coderslab.prostheticlab.service;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.prostheticlab.domain.DentalOffice;
 import pl.coderslab.prostheticlab.repository.DentalOfficeRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class DentalOfficeService  {
 
     private final DentalOfficeRepository dentalOfficeRepository;

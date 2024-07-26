@@ -6,6 +6,9 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.pl.NIP;
 import org.hibernate.validator.constraints.pl.REGON;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -65,7 +68,8 @@ public class Laboratory {
     @ManyToMany(mappedBy = "laboratories")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<User> users = new HashSet<>();
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_laboratory")
     private Set<DentalOffice> dentalOffices = new HashSet<>();
 

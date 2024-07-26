@@ -1,6 +1,8 @@
 package pl.coderslab.prostheticlab.domain;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.pl.NIP;
 
 import javax.persistence.*;
@@ -54,16 +56,9 @@ public class DentalOffice {
     @Size(min = 9, max = 9, message = "podaj poprawny numer telefonu")
     private String phone;
 
-    @OneToMany
-    @JoinColumn(name = "id_dental_office")
-    private Set<Dentist> dentists = new HashSet<>();
-
-    @OneToMany
-    @JoinColumn(name = "id_dental_office")
-    private Set<Patient> patients = new HashSet<>();
-
     @OneToMany(mappedBy = "dentalOffice")
     private Set<Work> works = new HashSet<>();
+
 
     public DentalOffice() {}
 
@@ -145,22 +140,6 @@ public class DentalOffice {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Set<Dentist> getDentists() {
-        return dentists;
-    }
-
-    public void setDentists(Set<Dentist> dentists) {
-        this.dentists = dentists;
-    }
-
-    public Set<Patient> getPatients() {
-        return patients;
-    }
-
-    public void setPatients(Set<Patient> patients) {
-        this.patients = patients;
     }
 
     public Set<Work> getWorks() {

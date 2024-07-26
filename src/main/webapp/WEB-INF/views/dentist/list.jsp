@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="../menu.jsp" %>
-
+TWOJ LABOR ${lanoratoryName}
 <h1>LISTA DENTYSTÓW</h1>
     <table>
         <thead>
