@@ -2,16 +2,12 @@ package pl.coderslab.prostheticlab.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "offers")
-public class Offer {
+@Table(name = "sample_offer")
+public class SampleOffer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +17,8 @@ public class Offer {
     @Size(min = 2, message = "nazwa musi mieć przynajmniej 2 znaki")
     private String name;
 
-    @NotBlank
-    @Min(value = 1, message = "cena musi być wieksza od 0")
-    @Column(name = "unit_price")
-    private int unitPrice;
-
-    public Offer() {}
+    public SampleOffer() {
+    }
 
     public Long getId() {
         return id;
@@ -36,30 +28,19 @@ public class Offer {
         this.id = id;
     }
 
-    public String getName() {
+    public @NotBlank @Size(min = 2, message = "nazwa musi mieć przynajmniej 2 znaki") String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NotBlank @Size(min = 2, message = "nazwa musi mieć przynajmniej 2 znaki") String name) {
         this.name = name;
-    }
-
-    public int getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(int unitPrice) {
-        this.unitPrice = unitPrice;
     }
 
     @Override
     public String toString() {
-        return "Offer{" +
+        return "SampleOffer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", unitPrice=" + unitPrice +
                 '}';
     }
 }
-
-

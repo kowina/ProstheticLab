@@ -1,14 +1,10 @@
 package pl.coderslab.prostheticlab.domain;
 
 
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.pl.NIP;
 import org.hibernate.validator.constraints.pl.REGON;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -73,13 +69,10 @@ public class Laboratory {
     @JoinColumn(name = "id_laboratory")
     private Set<DentalOffice> dentalOffices = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_laboratory")
     private Set<Dentist> dentists = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "id_laboratory")
-    private Set<Patient> patients = new HashSet<>();
 
     @OneToMany(mappedBy = "laboratory")
     private Set<Work> works = new HashSet<>();
@@ -201,14 +194,6 @@ public class Laboratory {
 
     public void setDentists(Set<Dentist> dentists) {
         this.dentists = dentists;
-    }
-
-    public Set<Patient> getPatients() {
-        return patients;
-    }
-
-    public void setPatients(Set<Patient> patients) {
-        this.patients = patients;
     }
 
     public Set<Work> getWorks() {

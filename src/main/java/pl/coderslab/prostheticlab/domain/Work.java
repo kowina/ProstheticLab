@@ -35,7 +35,7 @@ public class Work {
 
     @OneToMany
     @JoinColumn(name = "id_work")
-    private Set<WorkItem> workItems = new HashSet<>();
+    private Set<Offer> offers = new HashSet<>();
 
     @ManyToOne
     private Laboratory laboratory;
@@ -45,9 +45,6 @@ public class Work {
 
     @ManyToOne
     private Dentist dentist;
-
-    @ManyToOne
-    private Patient patient;
 
     public Work() {}
 
@@ -99,14 +96,6 @@ public class Work {
         this.totalPrice = totalPrice;
     }
 
-    public Set<WorkItem> getWorkItems() {
-        return workItems;
-    }
-
-    public void setWorkItems(Set<WorkItem> workItems) {
-        this.workItems = workItems;
-    }
-
     public Laboratory getLaboratory() {
         return laboratory;
     }
@@ -131,13 +120,6 @@ public class Work {
         this.dentist = dentist;
     }
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
 
     @Override
     public String toString() {
@@ -148,11 +130,9 @@ public class Work {
                 ", created=" + created +
                 ", finished=" + finished +
                 ", totalPrice=" + totalPrice +
-                ", workItems=" + workItems +
                 ", laboratory=" + laboratory +
                 ", dentalOffice=" + dentalOffice +
                 ", dentist=" + dentist +
-                ", patient=" + patient +
                 '}';
     }
 }
