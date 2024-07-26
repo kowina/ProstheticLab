@@ -30,20 +30,27 @@ public class Work {
     @Future
     private LocalDate finished;
 
+    @ManyToOne
+    @JoinColumn(name = "id_offer")
+    private Offer offer;
+
     @Column(name = "total_price")
     private int totalPrice;
 
-    @OneToMany
-    @JoinColumn(name = "id_work")
-    private Set<Offer> offers = new HashSet<>();
+    @NotBlank
+    @Size(min = 2)
+    private String patient;
 
     @ManyToOne
+    @JoinColumn(name = "id_laboratory")
     private Laboratory laboratory;
 
     @ManyToOne
+    @JoinColumn(name = "id_dental_office")
     private DentalOffice dentalOffice;
 
     @ManyToOne
+    @JoinColumn(name = "id_dentist")
     private Dentist dentist;
 
     public Work() {}
@@ -120,6 +127,22 @@ public class Work {
         this.dentist = dentist;
     }
 
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
+    }
+
+    public @NotBlank @Size(min = 2) String getPatient() {
+        return patient;
+    }
+
+    public void setPatient(@NotBlank @Size(min = 2) String patient) {
+        this.patient = patient;
+    }
 
     @Override
     public String toString() {

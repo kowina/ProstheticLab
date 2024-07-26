@@ -75,7 +75,7 @@ public class DentistController {
         return "dentist/list";
     }
     @GetMapping("/list/{id}")
-    public String listDentistsyLaboratory(@PathVariable Long id, Model model) {
+    public String listDentistsbyLaboratory(@PathVariable Long id, Model model) {
         model.addAttribute("dentists", laboratoryService.findById(id).getDentists());
         model.addAttribute("laboratory", laboratoryService.findById(id));
         return "dentist/list";

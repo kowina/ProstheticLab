@@ -73,6 +73,9 @@ public class Laboratory {
     @JoinColumn(name = "id_laboratory")
     private Set<Dentist> dentists = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_laboratory")
+    private Set<Offer> offers = new HashSet<>();
 
     @OneToMany(mappedBy = "laboratory")
     private Set<Work> works = new HashSet<>();
@@ -202,6 +205,14 @@ public class Laboratory {
 
     public void setWorks(Set<Work> works) {
         this.works = works;
+    }
+
+    public Set<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(Set<Offer> offers) {
+        this.offers = offers;
     }
 
     @Override

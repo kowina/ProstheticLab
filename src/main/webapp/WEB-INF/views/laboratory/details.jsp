@@ -29,6 +29,7 @@
         <th>MIASTO</th>
         <th>KOD POCZTOWY</th>
         <th>Gabinety</th>
+        <th>Oferty</th>
     </tr>
     </thead>
     <tbody>
@@ -44,6 +45,7 @@
             <td>${laboratory.city}</td>
             <td>${laboratory.postalCode}</td>
             <td>${laboratory.dentalOffices}</td>
+            <td>${laboratory.offers}</td>
             <td>
                 <a href="/app/laboratories/edit/${laboratory.id}">EDYTUJ</a>
                 <a href="/app/laboratories/confirmDelete/${laboratory.id}">USUŃ</a>
