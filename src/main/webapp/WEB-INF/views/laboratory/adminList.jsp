@@ -1,5 +1,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>admin panel</title>
@@ -19,7 +21,7 @@
 <a href="/app/laboratories/list">LABORATORIA</a>
 <a href="/app/dentalOffices/list">GABINETY</a>
 <a href="/app/dentists/list">LEKARZE</a>
-<a href="">TWOJA OFERTA</a>
+
 
 <h1>LISTA LABORATORIÓW</h1>
 <table>
@@ -35,10 +37,10 @@
         <tr>
             <td>${laboratory.id}</td>
             <td>${laboratory.name}</td>
-            <td>${laboratory.users.name}</td>
+            <td>${laboratory.users}</td>
             <td>
-                                            <a href="/app/laboratories/get/${laboratory.id}">Szczegóły</a>
-                    <%--                        <a href="/authors/confirmDel/${author.id}">Delete</a>--%>
+<%--                                            <a href="/app/laboratories/get/${laboratory.id}">Szczegóły</a>--%>
+<%--                    &lt;%&ndash;                        <a href="/authors/confirmDel/${author.id}">Delete</a>&ndash;%&gt;--%>
             </td>
         </tr>
     </c:forEach>

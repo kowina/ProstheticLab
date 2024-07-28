@@ -4,8 +4,8 @@ package pl.coderslab.prostheticlab.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "dentists")
@@ -27,9 +27,10 @@ public class Dentist {
 
 
     @OneToMany(mappedBy = "dentist")
-    private Set<Work> works = new HashSet<>();
+    private List<Work> works = new LinkedList<>();
 
-    public Dentist() {}
+    public Dentist() {
+    }
 
     public Long getId() {
         return id;
@@ -56,11 +57,11 @@ public class Dentist {
     }
 
 
-    public Set<Work> getWorks() {
+    public List<Work> getWorks() {
         return works;
     }
 
-    public void setWorks(Set<Work> works) {
+    public void setWorks(List<Work> works) {
         this.works = works;
     }
 

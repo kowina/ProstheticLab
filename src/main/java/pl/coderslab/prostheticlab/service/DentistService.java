@@ -38,4 +38,8 @@ public class DentistService {
     public List<Dentist> getAll() {
         return dentistRepository.findAll();
     }
+
+    public List<Dentist> findByLaboratoryId(Long laboratoryId) {
+        return dentistRepository.findByLaboratoryId(laboratoryId);
+    }
 }

@@ -26,8 +26,8 @@ public class HomeController {
         if (customUser.getUser().getLaboratories().isEmpty()) {
             return "redirect:/app/laboratories/add";
 
-        }else {
-            return "redirect:/app/laboratories/choice/"+customUser.getUser().getId();
+        } else {
+            return "redirect:/app/laboratories/choice/" + customUser.getUser().getId();
 
         }
     }

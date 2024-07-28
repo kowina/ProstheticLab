@@ -10,7 +10,7 @@
 
 <a href="/login">LOGOWANIE</a>
 
-<a href="/app/laboratories/list">TWOJE LABORATORIUM</a>
+<a href="/app">TWOJE LABORATORIUM</a>
 
 <sec:authorize access="isAuthenticated()">
     <form  method="post" action="/logout">

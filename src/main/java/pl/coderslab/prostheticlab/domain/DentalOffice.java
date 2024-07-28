@@ -4,9 +4,12 @@ package pl.coderslab.prostheticlab.domain;
 import org.hibernate.validator.constraints.pl.NIP;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "dental_offices")
@@ -31,7 +34,6 @@ public class DentalOffice {
     @NotBlank
     @Column(name = "street_number")
     @Min(1)
-    @Max(4)
     private String streetNumber;
 
     @Column(name = "locale_number")
@@ -55,10 +57,11 @@ public class DentalOffice {
     private String phone;
 
     @OneToMany(mappedBy = "dentalOffice")
-    private Set<Work> works = new HashSet<>();
+    private List<Work> works = new LinkedList<>();
 
 
-    public DentalOffice() {}
+    public DentalOffice() {
+    }
 
     public Long getId() {
         return id;
@@ -68,11 +71,11 @@ public class DentalOffice {
         this.id = id;
     }
 
-    public  String getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName( String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -80,19 +83,19 @@ public class DentalOffice {
         return nip;
     }
 
-    public void setNip( String nip) {
+    public void setNip(String nip) {
         this.nip = nip;
     }
 
-    public  String getStreet() {
+    public String getStreet() {
         return street;
     }
 
-    public void setStreet( String street) {
+    public void setStreet(String street) {
         this.street = street;
     }
 
-    public  String getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
@@ -108,7 +111,7 @@ public class DentalOffice {
         this.localeNumber = localeNumber;
     }
 
-    public  String getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
@@ -124,7 +127,7 @@ public class DentalOffice {
         this.city = city;
     }
 
-    public  String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -140,11 +143,11 @@ public class DentalOffice {
         this.phone = phone;
     }
 
-    public Set<Work> getWorks() {
+    public List<Work> getWorks() {
         return works;
     }
 
-    public void setWorks(Set<Work> works) {
+    public void setWorks(List<Work> works) {
         this.works = works;
     }
 

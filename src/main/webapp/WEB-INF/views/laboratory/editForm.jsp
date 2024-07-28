@@ -13,6 +13,9 @@
 
 <form:form modelAttribute="laboratory" action="/app/laboratories/edit" method="post">
     <form:hidden path="id"/>
+     <form:hidden path="offers"/>
+    <form:hidden path="dentists"/>
+    <form:hidden path="dentalOffices"/>
     <label>
         Nazwa: <form:input path="name"/>
     </label>

@@ -4,14 +4,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Form add dentist</title>
+    <title>Form add dentalOffice</title>
 </head>
 <body>
 <a href="/app/laboratories/choice/+<sec:authentication property="principal.user.id"/>">PRZEŁĄCZ LABORATORIUM</a>
 
 <%@ include file="../menu.jsp" %>
 
-<h1>DODANIE LEKARZA</h1>
+<h1>DODANIE GABINETU</h1>
 
 <form:form modelAttribute="dentalOffice" action="/app/dentalOffices/add/${laboratory.id}" method="post">
     <form:hidden path="id"/>

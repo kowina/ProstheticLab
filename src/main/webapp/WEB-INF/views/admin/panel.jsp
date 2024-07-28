@@ -8,7 +8,6 @@
 <body>
 <h3>Panel administratora</h3>
 <h3>Cześć <sec:authentication property="principal.user.firstName"/></h3>
-<%--<p>Zalogowany jako: <sec:authentication property="principal.user.firstName"/></p>--%>
 <sec:authorize access="isAuthenticated()">
 <form  method="post" action="/logout">
     <input class="fa fa-id-badge" type="submit" value="Wyloguj">
@@ -17,7 +16,7 @@
     <%--    <p>Zalogowany jako: <sec:authentication property="principal.user.firstName"/></p>--%>
     <%--    <p>Posiada role: <sec:authentication property="authorities"/></p>--%>
 </sec:authorize>
-<a href="/app/laboratories/list">TWOJE LABORATORIUM</a>
-<a href="">GABINETY</a>
+<a href="/app/laboratories/list">LABORATORIA</a>
+<a href="/app/dentalOffices/list">GABINETY</a>
 <a href="/app/dentists/list">LEKARZE</a>
-<a href="">TWOJA OFERTA</a>
+

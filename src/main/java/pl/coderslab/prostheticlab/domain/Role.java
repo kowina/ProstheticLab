@@ -13,7 +13,8 @@ public class Role {
 
     private String name;
 
-    public Role() {}
+    public Role() {
+    }
 
     public Long getId() {
         return id;

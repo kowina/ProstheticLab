@@ -16,18 +16,18 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-private final RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
 
-public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
-    this.userRepository = userRepository;
-    this.roleRepository = roleRepository;
-    this.passwordEncoder = passwordEncoder;
-}
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
     @Override
@@ -51,15 +51,15 @@ public UserServiceImpl(UserRepository userRepository, RoleRepository roleReposit
     }
 
     public List<User> findAll() {
-    return userRepository.findAll();
+        return userRepository.findAll();
     }
 
     public User findById(Long id) {
-    return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElse(null);
     }
 
     public void update(User user) {
-    userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override

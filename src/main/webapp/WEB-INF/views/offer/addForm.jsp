@@ -31,9 +31,5 @@
     <form:button>DODAJ</form:button>
 </form:form>
 </div>
-
-
-
-
 </body>
 </html>

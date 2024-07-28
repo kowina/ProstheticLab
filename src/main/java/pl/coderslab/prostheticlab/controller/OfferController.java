@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.prostheticlab.domain.Dentist;
 import pl.coderslab.prostheticlab.domain.Laboratory;
 import pl.coderslab.prostheticlab.domain.Offer;
 import pl.coderslab.prostheticlab.domain.SampleOffer;
@@ -15,7 +14,6 @@ import pl.coderslab.prostheticlab.service.SampleOfferService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/app/offers")
@@ -47,16 +45,17 @@ public class OfferController {
     }
 
     @PostMapping("/add/{id}")
-    public String add(@Valid Offer offer, BindingResult bindingResult, @PathVariable Long id) {
+    public String add(@Valid Offer offer, BindingResult bindingResult, @PathVariable Long id, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("laboratory", laboratoryService.findById(id));
             return "offer/addForm";
         }
         Laboratory laboratory = laboratoryService.findById(id);
-        Set<Offer> offers = laboratory.getOffers();
+        List<Offer> offers = laboratory.getOffers();
         offers.add(offer);
         laboratory.setOffers(offers);
         offerService.save(offer);
-        return "redirect:/app/offers/list/"+laboratory.getId();
+        return "redirect:/app/offers/list/" + laboratory.getId();
     }
 
     @GetMapping("/edit/{id}/{labId}")
@@ -71,10 +70,11 @@ public class OfferController {
     public String edit(@Valid Offer offer, BindingResult bindingResult, @PathVariable Long id, Model model) {
         model.addAttribute("laboratory", laboratoryService.findById(id));
         if (bindingResult.hasErrors()) {
+            model.addAttribute("laboratory", laboratoryService.findById(id));
             return "offer/editForm";
         }
         offerService.update(offer);
-        return "redirect:/app/offers/list/"+id;
+        return "redirect:/app/offers/list/" + id;
     }
 
     @GetMapping("/list/{id}")
@@ -91,7 +91,7 @@ public class OfferController {
         model.addAttribute("offer", offerService.getById(offerId));
 
         offerService.delete(offerService.getById(offerId));
-        return "redirect:/app/offers/list/"+laboratoryId;
+        return "redirect:/app/offers/list/" + laboratoryId;
     }
 
     @GetMapping("/confirmDelete/{id}/{labId}")

@@ -13,13 +13,20 @@
 </sec:authorize>
 <h1>${laboratory.name}</h1>
  <br>
+<h2>
 <a href="/app/laboratories/get/${laboratory.id}">TWOJE LABORATORIUM</a>
 <a href="/app/dentalOffices/list/${laboratory.id}">GABINETY</a>
 <a href="/app/dentists/list/${laboratory.id}">LEKARZE</a>
-<a href="/app/offers/list/${laboratory.id}">TWOJA OFERTA</a><br>
-
+<a href="/app/offers/list/${laboratory.id}">TWOJA OFERTA</a>
+<a href="/app/works/list/${laboratory.id}">PRACE</a><br>
+</h2>
+<h3>
 <a href="/app/dentalOffices/add/${laboratory.id}">DODAJ GABINET</a>
 <a href="/app/dentists/add/${laboratory.id}">DODAJ LEKARZA</a>
 <a href="/app/offers/add/${laboratory.id}">DODAJ DO OFERTY</a>
+<a href="/app/works/add/${laboratory.id}">DODAJ PRACĘ</a>
+</h3>
+
+
 
 

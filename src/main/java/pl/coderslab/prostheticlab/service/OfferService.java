@@ -1,7 +1,6 @@
 package pl.coderslab.prostheticlab.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.prostheticlab.domain.Offer;
 import pl.coderslab.prostheticlab.repository.OfferRepository;
@@ -29,14 +28,20 @@ public class OfferService {
         return offerRepository.findById(id).orElse(null);
     }
 
-     public void delete(Offer offer) {
+    public void delete(Offer offer) {
         offerRepository.delete(offer);
-     }
+    }
 
-     public void deleteById(Long id) {
+    public void deleteById(Long id) {
         offerRepository.deleteById(id);
-     }
-     public void update(Offer offer) {
+    }
+
+    public void update(Offer offer) {
         offerRepository.save(offer);
-     }
+    }
+
+    public List<Offer> findByLaboratoryId(Long laboratoryId) {
+        return offerRepository.findByLaboratoryId(laboratoryId);
+
+    }
 }

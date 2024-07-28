@@ -19,6 +19,7 @@ public class SampleOfferService {
     public List<SampleOffer> getSampleOffers() {
         return sampleOfferRepository.findAll();
     }
+
     public SampleOffer getSampleOfferById(Long id) {
         return sampleOfferRepository.findById(id).orElse(null);
     }

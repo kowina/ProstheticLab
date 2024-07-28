@@ -2,9 +2,9 @@ package pl.coderslab.prostheticlab.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "offers")
@@ -15,7 +15,6 @@ public class Offer {
     private Long id;
 
     @NotBlank
-   // @Size(min = 2, message = "nazwa musi mieć przynajmniej 2 znaki")
     private String name;
 
     @NotNull
@@ -23,7 +22,8 @@ public class Offer {
     @Column(name = "unit_price")
     private int unitPrice;
 
-    public Offer() {}
+    public Offer() {
+    }
 
     public Long getId() {
         return id;

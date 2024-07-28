@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.prostheticlab.domain.DentalOffice;
 import pl.coderslab.prostheticlab.domain.Dentist;
 import pl.coderslab.prostheticlab.domain.Laboratory;
 import pl.coderslab.prostheticlab.service.DentistService;
 import pl.coderslab.prostheticlab.service.LaboratoryService;
+import pl.coderslab.prostheticlab.service.WorkService;
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 @Controller
 @RequestMapping("/app/dentists")
@@ -25,9 +25,13 @@ public class DentistController {
 
     private final LaboratoryService laboratoryService;
 
-    public DentistController(DentistService dentistService, LaboratoryService laboratoryService) {
+    private final WorkService workService;
+
+    public DentistController(DentistService dentistService, LaboratoryService laboratoryService, WorkService workService) {
         this.dentistService = dentistService;
         this.laboratoryService = laboratoryService;
+
+        this.workService = workService;
     }
 
 
@@ -39,12 +43,14 @@ public class DentistController {
     }
 
     @PostMapping("/add/{id}")
-    public String add(@Valid Dentist dentist, BindingResult bindingResult, @PathVariable Long id) {
+    public String add(@Valid Dentist dentist, BindingResult bindingResult, @PathVariable Long id, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("laboratory", laboratoryService.findById(id));
+
             return "dentist/addForm";
         }
         Laboratory laboratory = laboratoryService.findById(id);
-        Set<Dentist> dentists = laboratory.getDentists();
+        List<Dentist> dentists = laboratory.getDentists();
         dentists.add(dentist);
         laboratory.setDentists(dentists);
         dentistService.save(dentist);
@@ -63,6 +69,7 @@ public class DentistController {
     public String edit(@Valid Dentist dentist, BindingResult bindingResult, @PathVariable Long id, Model model) {
         model.addAttribute("laboratory", laboratoryService.findById(id));
         if (bindingResult.hasErrors()) {
+            model.addAttribute("laboratory", laboratoryService.findById(id));
             return "dentist/editForm";
         }
         dentistService.update(dentist);
@@ -72,7 +79,7 @@ public class DentistController {
     @GetMapping("/list")
     public String listDentists(Model model) {
         model.addAttribute("dentists", dentistService.getAll());
-        return "dentist/list";
+        return "dentist/adminList";
     }
     @GetMapping("/list/{id}")
     public String listDentistsbyLaboratory(@PathVariable Long id, Model model) {
@@ -80,12 +87,23 @@ public class DentistController {
         model.addAttribute("laboratory", laboratoryService.findById(id));
         return "dentist/list";
     }
+    @GetMapping("/list/{id}/{labId}")
+    public String AllWorksbyDentists(@PathVariable ("id") Long id,
+                                     @PathVariable ("labId") Long laboratoryId ,Model model) {
+        model.addAttribute("works", workService.findAllWorkByDentist(laboratoryId, id));
+        model.addAttribute("laboratory", laboratoryService.findById(laboratoryId));
+        model.addAttribute("numberOfWorks", workService.countWorksByDentist(laboratoryId, id));
+
+        return "work/list";
+    }
 
     @GetMapping("get/{id}/{labId}")
     public String get(@PathVariable("id") Long dentistId,
                       @PathVariable("labId") Long laboratoryId, Model model) {
         model.addAttribute("laboratory", laboratoryService.findById(laboratoryId));
         model.addAttribute("dentist", dentistService.findById(dentistId));
+        model.addAttribute("lastThree", workService.findLastThreeAddedWorkByDentist(laboratoryId, dentistId));
+        model.addAttribute("numberOfWorks", workService.countWorksByDentist(laboratoryId, dentistId));
         return "dentist/details";
     }
 

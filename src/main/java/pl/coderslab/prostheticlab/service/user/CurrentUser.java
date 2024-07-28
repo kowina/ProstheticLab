@@ -8,11 +8,15 @@ import java.util.Collection;
 
 public class CurrentUser extends User {
     private final pl.coderslab.prostheticlab.domain.User user;
+
     public CurrentUser(String username, String password,
                        Collection<? extends GrantedAuthority> authorities,
                        pl.coderslab.prostheticlab.domain.User user) {
         super(username, password, authorities);
         this.user = user;
     }
-    public pl.coderslab.prostheticlab.domain.User getUser() {return user;}
+
+    public pl.coderslab.prostheticlab.domain.User getUser() {
+        return user;
+    }
 }

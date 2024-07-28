@@ -1,13 +1,10 @@
 package pl.coderslab.prostheticlab.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.prostheticlab.domain.Laboratory;
-import pl.coderslab.prostheticlab.domain.User;
 import pl.coderslab.prostheticlab.repository.LaboratoryRepository;
 
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
@@ -31,6 +28,7 @@ public class LaboratoryService {
     public void delete(Laboratory laboratory) {
         laboratoryRepository.delete(laboratory);
     }
+
     public void deleteById(Long id) {
         laboratoryRepository.deleteById(id);
     }
@@ -39,7 +37,8 @@ public class LaboratoryService {
         return laboratoryRepository.findById(id).orElse(null);
     }
 
-    public List<Laboratory> getAll(){
+
+    public List<Laboratory> getAll() {
         return laboratoryRepository.findAll();
     }
 

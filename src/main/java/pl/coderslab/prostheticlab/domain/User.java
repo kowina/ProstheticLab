@@ -45,13 +45,13 @@ public class User {
     private boolean enabled;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_laboratory", joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "laboratory_id"))
+            inverseJoinColumns = @JoinColumn(name = "laboratory_id"))
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Laboratory> laboratories = new HashSet<>();
 
@@ -65,15 +65,16 @@ public class User {
     public String getUsername() {
         return username;
     }
+
     public String getFirstName() {
         return firstName;
     }
 
-    public  String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public  String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -105,7 +106,7 @@ public class User {
         this.firstName = firstName;
     }
 
-    public void setLastName( String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 

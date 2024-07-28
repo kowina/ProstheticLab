@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.prostheticlab.domain.Laboratory;
 import pl.coderslab.prostheticlab.domain.User;
 import pl.coderslab.prostheticlab.service.LaboratoryService;
+import pl.coderslab.prostheticlab.service.WorkService;
 import pl.coderslab.prostheticlab.service.user.CurrentUser;
 import pl.coderslab.prostheticlab.service.user.UserServiceImpl;
 
@@ -25,9 +26,12 @@ public class LaboratoryController {
 
     private final UserServiceImpl userService;
 
-    public LaboratoryController(LaboratoryService laboratoryService, UserServiceImpl userService) {
+    private final WorkService workService;
+
+    public LaboratoryController(LaboratoryService laboratoryService, UserServiceImpl userService, WorkService workService) {
         this.laboratoryService = laboratoryService;
         this.userService = userService;
+        this.workService = workService;
     }
 
 
@@ -36,14 +40,15 @@ public class LaboratoryController {
         return userService.findAll();
     }
 
+
     @GetMapping("/choice/{id}")
     public String choice(@PathVariable Long id, Model model) {
         Set<Laboratory> userLaboratories = userService.findById(id).getLaboratories();
         model.addAttribute("laboratories", userLaboratories);
-        if(userLaboratories.size() == 1){
+        if (userLaboratories.size() == 1) {
             Laboratory userLaboratory = userLaboratories.iterator().next();
             model.addAttribute("laboratory", userLaboratory);
-        return "redirect:/app/laboratories/home/"+userLaboratory.getId();
+            return "redirect:/app/laboratories/home/" + userLaboratory.getId();
         }
         return "laboratory/choice";
     }
@@ -51,6 +56,8 @@ public class LaboratoryController {
     @GetMapping("/home/{id}")
     public String home(@PathVariable Long id, Model model) {
         model.addAttribute("laboratory", laboratoryService.findById(id));
+        model.addAttribute("lastThree", workService.findLastThreeAddedWork(id));
+        model.addAttribute("numberOfWorks", workService.countWorksBylaboratory(id));
         return "laboratory/homeLab";
 
     }
@@ -58,28 +65,29 @@ public class LaboratoryController {
     @GetMapping("/add")
     public String addLaboratory(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("laboratory", new Laboratory());
-
         return "laboratory/addForm";
 
     }
 
     @PostMapping("/add")
-    public String add(@Valid Laboratory laboratory, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser customUser) {
+    public String add(@Valid Laboratory laboratory, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser customUser, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("laboratory", laboratory);
+
             return "laboratory/addForm";
         }
         User user = customUser.getUser();
         Set<Laboratory> laboratories = user.getLaboratories();
         if (laboratories != null) {
             laboratories.add(laboratory);
-        }else {
+        } else {
             laboratories = new HashSet<>();
             laboratories.add(laboratory);
         }
         user.setLaboratories(laboratories);
         userService.update(user);
         laboratoryService.save(laboratory);
-        return "redirect:/app/laboratories/choice/"+user.getId();
+        return "redirect:/app/laboratories/choice/" + user.getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -89,12 +97,17 @@ public class LaboratoryController {
     }
 
     @PostMapping("/edit")
-    public String edit(@Valid Laboratory laboratory, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser customUser) {
+    public String edit(@Valid Laboratory laboratory, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser customUser, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("laboratory", laboratory);
+
             return "laboratory/editForm";
         }
         laboratoryService.update(laboratory);
-        return "redirect:/app/laboratories/get/"+laboratory.getId();
+        model.addAttribute("lastThree", workService.findLastThreeAddedWork(laboratory.getId()));
+        model.addAttribute("numberOfWorks", workService.countWorksBylaboratory(laboratory.getId()));
+
+        return "redirect:/app/laboratories/get/" + laboratory.getId();
     }
 
     @GetMapping("/list")
@@ -118,7 +131,7 @@ public class LaboratoryController {
         userService.update(user);
 
         laboratoryService.deleteById(id);
-        return "redirect:/app/laboratories/choice/"+customUser.getUser().getId();
+        return "redirect:/app/laboratories/choice/" + customUser.getUser().getId();
     }
 
     @GetMapping("/confirmDelete/{id}")
@@ -130,7 +143,9 @@ public class LaboratoryController {
     @GetMapping("get/{id}")
     public String get(@PathVariable Long id, Model model) {
         model.addAttribute("laboratory", laboratoryService.findById(id));
-//        model.addAttribute("laboratoryName", laboratoryService.findById(id).getName());
+        model.addAttribute("lastThree", workService.findLastThreeAddedWork(id));
+        model.addAttribute("numberOfWorks", workService.countWorksBylaboratory(id));
+
         return "laboratory/details";
     }
 }

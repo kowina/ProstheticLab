@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DentalOfficeService  {
+public class DentalOfficeService {
 
     private final DentalOfficeRepository dentalOfficeRepository;
 
@@ -37,5 +37,9 @@ public class DentalOfficeService  {
 
     public List<DentalOffice> getAll() {
         return dentalOfficeRepository.findAll();
+    }
+
+    public List<DentalOffice> findByLaboratoryId(Long laboratoryId) {
+        return dentalOfficeRepository.findByLaboratoryId(laboratoryId);
     }
 }

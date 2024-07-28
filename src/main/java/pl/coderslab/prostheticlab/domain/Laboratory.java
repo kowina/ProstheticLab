@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.pl.REGON;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -67,20 +69,21 @@ public class Laboratory {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_laboratory")
-    private Set<DentalOffice> dentalOffices = new HashSet<>();
+    private List<DentalOffice> dentalOffices = new LinkedList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_laboratory")
-    private Set<Dentist> dentists = new HashSet<>();
+    private List<Dentist> dentists = new LinkedList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_laboratory")
-    private Set<Offer> offers = new HashSet<>();
+    private List<Offer> offers = new LinkedList<>();
 
     @OneToMany(mappedBy = "laboratory")
-    private Set<Work> works = new HashSet<>();
+    private List<Work> works = new LinkedList<>();
 
-    public Laboratory() {}
+    public Laboratory() {
+    }
 
     public Long getId() {
         return id;
@@ -94,11 +97,11 @@ public class Laboratory {
         return name;
     }
 
-    public void setName (String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public  String getNip() {
+    public String getNip() {
         return nip;
     }
 
@@ -114,7 +117,7 @@ public class Laboratory {
         this.regon = region;
     }
 
-    public  String getStreet() {
+    public String getStreet() {
         return street;
     }
 
@@ -126,7 +129,7 @@ public class Laboratory {
         return streetNumber;
     }
 
-    public void setStreetNumber( String streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
@@ -138,11 +141,11 @@ public class Laboratory {
         this.localeNumber = localeNumber;
     }
 
-    public  String getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode( String postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
@@ -150,7 +153,7 @@ public class Laboratory {
         return city;
     }
 
-    public void setCity( String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -166,7 +169,7 @@ public class Laboratory {
         return phone;
     }
 
-    public void setPhone( String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -178,40 +181,40 @@ public class Laboratory {
         this.users = users;
     }
 
-    public String getFullAdress(){
+    public String getFullAdress() {
         return street + " " + streetNumber + " " + localeNumber + " " + postalCode + " " + city;
     }
 
 
-    public Set<DentalOffice> getDentalOffices() {
+    public List<DentalOffice> getDentalOffices() {
         return dentalOffices;
     }
 
-    public void setDentalOffices(Set<DentalOffice> dentalOffices) {
+    public void setDentalOffices(List<DentalOffice> dentalOffices) {
         this.dentalOffices = dentalOffices;
     }
 
-    public Set<Dentist> getDentists() {
+    public List<Dentist> getDentists() {
         return dentists;
     }
 
-    public void setDentists(Set<Dentist> dentists) {
+    public void setDentists(List<Dentist> dentists) {
         this.dentists = dentists;
     }
 
-    public Set<Work> getWorks() {
+    public List<Work> getWorks() {
         return works;
     }
 
-    public void setWorks(Set<Work> works) {
+    public void setWorks(List<Work> works) {
         this.works = works;
     }
 
-    public Set<Offer> getOffers() {
+    public List<Offer> getOffers() {
         return offers;
     }
 
-    public void setOffers(Set<Offer> offers) {
+    public void setOffers(List<Offer> offers) {
         this.offers = offers;
     }
 
